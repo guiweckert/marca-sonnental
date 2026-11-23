@@ -1,0 +1,27 @@
+SONNENTAL ENERGIA - MODELO 3D DO SÍMBOLO (ESFERA 2026)
+
+Este é o símbolo em 3D, limpo, para visualizar, renderizar, animar ou usar em apresentações.
+Não tem nenhum furo, pino ou encaixe: esses detalhes existem só nos arquivos de impressão 3D
+(pasta "Impressão 3D").
+
+ARQUIVOS
+- sonnental-esfera-2026.glb
+  O modelo completo, já com as cores. Abre direto no Visualizador 3D do Windows, no PowerPoint
+  (Inserir > Modelos 3D), no Blender, no Keynote e em visualizadores on-line de GLB.
+- sonnental-esfera-2026.blend
+  O mesmo modelo no Blender, com materiais.
+- sonnental-esfera-2026_calota_azul.stl
+- sonnental-esfera-2026_faixa_cinza.stl
+- sonnental-esfera-2026_calota_verde.stl
+- sonnental-esfera-2026_sol.stl
+  As quatro partes separadas, sem cor (STL não guarda cor), para qualquer programa de CAD ou 3D.
+  Abra as quatro juntas: já estão na posição certa umas em relação às outras.
+
+MEDIDAS E CORES
+- Esfera com 220 mm de diâmetro (unidades em milímetros nos STL e em metros no GLB, o padrão do formato).
+- Casca com espessura constante; sol central com 0,66 do raio da esfera.
+- Calota de cima: azul #045AA0. Faixa do meio: cinza #99A7AA translúcido (80%).
+  Calota de baixo: verde #BFBF32. Sol: dourado #E8A90C.
+
+A malha foi simplificada para os arquivos ficarem leves (cerca de 75 mil triângulos no total).
+Para uma versão de altíssima resolução, use o kit da pasta "Como construir".

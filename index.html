@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marca Sonnental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Plano: página de leitura em uma coluna, com o símbolo 3D ao lado do título.
+   Fundo branco (o manual pede o logo 3D sobre branco) e as quatro cores da marca
+   usadas como marcação, nunca como fundo de texto longo. Tema único, claro. */
+:root {
+  color-scheme: light;
+  --azul: #045AA0;
+  --amarelo: #F7BF13;
+  --cinza: #99A7AA;
+  --verde: #BFBF32;
+  --tinta: #1E2A2F;
+  --tinta-suave: #55646B;
+  --papel: #FFFFFF;
+  --nevoa: #F1F5F6;
+  --linha: #D7DFE2;
+  --display: "Outfit", "Open Sans", system-ui, sans-serif;
+  --corpo: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --medida: 66ch;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--papel); color: var(--tinta);
+  font-family: var(--corpo); font-size: 17px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--azul); }
+:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.15; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: -0.03em; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p { margin: 0; }
+.wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+/* faixa das quatro cores, como no manual */
+.faixa { display: grid; grid-template-columns: repeat(4, 1fr); height: 6px; }
+.faixa i:nth-child(1) { background: var(--azul); }
+.faixa i:nth-child(2) { background: var(--amarelo); }
+.faixa i:nth-child(3) { background: var(--cinza); }
+.faixa i:nth-child(4) { background: var(--verde); }
+
+header.topo { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; flex-wrap: wrap; }
+header.topo img { width: 190px; }
+nav.indice { display: flex; gap: 6px 20px; flex-wrap: wrap; font-size: 0.9rem; }
+nav.indice a { color: var(--tinta-suave); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+nav.indice a:hover { color: var(--azul); border-bottom-color: var(--amarelo); }
+
+.abre { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 40px; align-items: center; padding: 28px 0 56px; }
+.sobre-titulo { font-style: italic; font-weight: 700; color: var(--cinza); font-size: 1.05rem; margin-bottom: 10px; }
+.abre .lead { font-size: 1.15rem; max-width: 46ch; margin-top: 22px; color: var(--tinta); }
+.abre .lead + .lead { margin-top: 14px; color: var(--tinta-suave); font-size: 1rem; }
+
+/* visualizador 3D */
+.visor { display: grid; gap: 14px; }
+.palco { position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 560px; margin-inline: auto;
+  background: radial-gradient(closest-side, #FFFFFF 55%, var(--nevoa) 100%); border-radius: 50%; }
+.palco canvas, .palco img.reserva { position: absolute; inset: 0; width: 100%; height: 100%; }
+.palco canvas { touch-action: pan-y; cursor: grab; border-radius: 50%; }
+.palco canvas:active { cursor: grabbing; }
+.palco img.reserva { object-fit: contain; padding: 6%; }
+.palco.pronto img.reserva { display: none; }
+.controles { display: flex; flex-wrap: wrap; gap: 10px 14px; justify-content: center; align-items: center; }
+.grupo { display: inline-flex; border: 1px solid var(--linha); border-radius: 999px; overflow: hidden; background: var(--papel); }
+.grupo button { font: 600 0.85rem var(--corpo); color: var(--tinta-suave); background: none; border: 0; padding: 8px 14px; cursor: pointer; }
+.grupo button + button { border-left: 1px solid var(--linha); }
+.grupo button:hover { color: var(--azul); background: var(--nevoa); }
+.grupo button[aria-pressed="true"] { background: var(--azul); color: #fff; }
+.girar { font-size: 0.85rem; color: var(--tinta-suave); display: inline-flex; gap: 6px; align-items: center; }
+.dica { text-align: center; font-size: 0.85rem; color: var(--tinta-suave); min-height: 2.8em; max-width: 52ch; margin-inline: auto; }
+
+section { padding: 64px 0; border-top: 1px solid var(--linha); }
+.cab { display: grid; gap: 10px; margin-bottom: 28px; max-width: var(--medida); }
+.cab p { color: var(--tinta-suave); }
+.texto { display: grid; gap: 16px; max-width: var(--medida); }
+.duas { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 44px; align-items: start; }
+figure { margin: 0; display: grid; gap: 8px; }
+figure img { border: 1px solid var(--linha); background: #fff; }
+figure img.limpa { border: 0; }
+figcaption { font-size: 0.85rem; color: var(--tinta-suave); }
+blockquote { margin: 0; padding-left: 18px; border-left: 4px solid var(--amarelo); font-style: italic; color: var(--tinta-suave); }
+
+/* significado das cores */
+.cores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 30px; border: 1px solid var(--linha); }
+.cor { display: grid; grid-template-rows: 84px auto; }
+.cor + .cor { border-left: 1px solid var(--linha); }
+.cor .amostra { background: var(--c); }
+.cor .info { padding: 14px 16px 16px; display: grid; gap: 4px; align-content: start; }
+.cor .nome { font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.cor .sig { font-size: 0.9rem; color: var(--tinta-suave); line-height: 1.45; }
+.cor button { justify-self: start; margin-top: 6px; font: 600 0.8rem ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: 0.02em;
+  color: var(--tinta); background: var(--nevoa); border: 1px solid var(--linha); border-radius: 4px; padding: 4px 8px; cursor: pointer; }
+.cor button:hover { border-color: var(--azul); color: var(--azul); }
+
+/* linha do tempo */
+.tempo { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; max-width: 860px; }
+.tempo li { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 24px; padding: 22px 0; border-top: 1px solid var(--linha); }
+.tempo li:first-child { border-top: 0; padding-top: 0; }
+.tempo .ano { font-family: var(--display); font-size: 1.6rem; font-weight: 500; color: var(--azul); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.tempo .ano small { display: block; font: 400 0.8rem var(--corpo); color: var(--tinta-suave); margin-top: 4px; }
+.tempo .oque { display: grid; gap: 10px; }
+.tempo .oque img { max-width: 300px; border: 0; }
+
+/* manual */
+.regras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 44px; }
+.regra { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 3px solid var(--tinta); }
+.regra p { color: var(--tinta-suave); font-size: 0.95rem; }
+.regra .num { font-family: var(--display); font-size: 1.5rem; color: var(--tinta); font-variant-numeric: tabular-nums; }
+.fontes { display: grid; gap: 6px; }
+.fontes .a { font-family: var(--display); font-size: 2rem; font-weight: 500; line-height: 1.1; }
+.fontes .b { font-style: italic; font-weight: 700; color: var(--cinza); font-size: 1.3rem; }
+
+/* missão, visão, valores */
+.mvv { display: grid; gap: 0; }
+.mvv article { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding: 30px 0; border-top: 1px solid var(--linha); }
+.mvv article:first-child { border-top: 0; padding-top: 6px; }
+.mvv .rot { font-style: italic; font-weight: 700; color: var(--cinza); font-size: 1.05rem; padding-top: 8px; }
+.mvv .frase { font-family: var(--display); font-size: clamp(1.35rem, 2.8vw, 1.9rem); font-weight: 500; line-height: 1.25; text-wrap: balance; max-width: 30ch; }
+.mvv .expl { color: var(--tinta-suave); max-width: 58ch; margin-top: 12px; }
+.valores { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.valores li { font-family: var(--display); font-size: 1.1rem; font-weight: 500; padding: 8px 16px; border: 1.5px solid var(--tinta); border-radius: 999px; }
+.origem { margin-top: 36px; background: var(--nevoa); padding: 26px 28px; display: grid; gap: 14px; }
+.origem dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 18px; margin: 0; }
+.origem dt { font-weight: 700; }
+.origem dd { margin: 0; color: var(--tinta-suave); }
+
+/* pessoas */
+.pessoas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 3px solid var(--tinta); margin-top: 8px; }
+.pessoa { padding: 18px 20px 6px 0; display: grid; gap: 4px; align-content: start; }
+.pessoa + .pessoa { padding-left: 20px; border-left: 1px solid var(--linha); }
+.pessoa .cargo { font-style: italic; font-weight: 700; color: var(--cinza); font-size: 0.95rem; }
+.pessoa p { color: var(--tinta-suave); font-size: 0.93rem; }
+
+footer { border-top: 1px solid var(--linha); padding: 30px 0 50px; font-size: 0.85rem; color: var(--tinta-suave); }
+footer .wrap { display: grid; gap: 8px; max-width: 1120px; }
+
+/* aplicacoes da marca */
+.vprincipal { margin-top: 44px; border: 1px solid var(--linha); background: #fff; padding: clamp(22px, 6vw, 64px); }
+.vprincipal img { width: 100%; max-width: 780px; margin-inline: auto; }
+.vgrade { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 44px; margin-top: 36px; }
+.vitem { display: grid; gap: 10px; align-content: start; }
+.vitem p { color: var(--tinta-suave); font-size: 0.95rem; }
+.vquadro { border: 1px solid var(--linha); background: #fff; padding: 22px; display: grid; place-items: center; min-height: 160px; }
+.vquadro img { width: 100%; max-width: 420px; }
+.vpar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: center; justify-items: center; width: 100%; }
+.vpar img { max-width: 150px; }
+.vpilha { display: grid; border: 1px solid var(--linha); }
+.vpilha div { padding: 16px 22px; display: grid; place-items: center; }
+.vpilha img { width: 100%; max-width: 300px; }
+/* arquivos para baixar */
+.arq { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px; align-items: start; margin-top: 8px; }
+.arq-lista { display: grid; gap: 22px; }
+.arq-grupo h3 { font-size: 1rem; margin-bottom: 10px; }
+.arq-botoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.arq-botoes button { font: 600 0.88rem var(--corpo); color: var(--tinta); background: #fff; border: 1px solid var(--linha); border-radius: 999px; padding: 9px 14px; cursor: pointer; min-height: 40px; }
+.arq-botoes button:hover { border-color: var(--azul); color: var(--azul); }
+.arq-botoes button[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: #fff; }
+.arq-painel { border: 1px solid var(--linha); display: grid; position: sticky; top: 16px; }
+.arq-previa { min-height: 260px; display: grid; place-items: center; padding: clamp(18px, 4vw, 40px); border-bottom: 1px solid var(--linha); }
+.arq-previa img { max-width: 100%; max-height: 320px; width: auto; }
+.arq-info { padding: 18px 20px 20px; display: grid; gap: 10px; }
+.arq-info p { color: var(--tinta-suave); font-size: 0.95rem; }
+.arq-formatos { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.arq-formatos button { font: 700 0.9rem var(--corpo); background: var(--azul); color: #fff; border: 0; border-radius: 6px; padding: 11px 16px; cursor: pointer; min-height: 44px; display: inline-flex; gap: 8px; align-items: baseline; }
+.arq-formatos button small { font-weight: 400; opacity: 0.85; }
+.arq-formatos button:hover { background: #034a84; }
+.arq-formatos .arq-link small { font-weight: 400; opacity: .8; margin-left: 4px; }
+.arq-formatos .arq-link { font: 700 0.9rem var(--corpo); background: var(--azul); color: #fff; border-radius: 6px; padding: 11px 16px; min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; }
+.arq-msg { font-size: 0.88rem; color: var(--tinta-suave); min-height: 1.4em; }
+.arq-drive { margin-top: 26px; color: var(--tinta-suave); max-width: var(--medida); }
+/* construir em 3D */
+.c3d { display: grid; gap: 34px; max-width: 900px; }
+.c3d h3 { font-size: 1.25rem; margin-bottom: 10px; }
+.c3d p, .c3d li { color: var(--tinta); }
+.c3d ol, .c3d ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.tabela { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.tabela th, .tabela td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--linha); }
+.tabela th { font-weight: 700; background: var(--nevoa); }
+.formula { background: var(--nevoa); padding: 18px 20px; font: 0.92rem/1.7 ui-monospace, "SF Mono", Menlo, Consolas, monospace; white-space: pre-wrap; overflow-x: auto; margin: 0; }
+.prompt { border: 1px solid var(--linha); padding: 18px 20px; display: grid; gap: 12px; }
+.prompt p { font-size: 0.95rem; }
+.prompt button { justify-self: start; font: 600 0.88rem var(--corpo); background: #fff; color: var(--azul); border: 1px solid var(--azul); border-radius: 6px; padding: 9px 14px; cursor: pointer; min-height: 40px; }
+
+@media (max-width: 860px) {
+  .arq { grid-template-columns: minmax(0, 1fr); }
+  .arq-painel { position: static; order: -1; }
+  .tabela { font-size: 0.88rem; }
+  .vgrade { grid-template-columns: minmax(0, 1fr); }
+  body { font-size: 16px; }
+  .abre, .duas { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .abre { padding-bottom: 40px; }
+  .cores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cor:nth-child(3) { border-left: 0; }
+  .cor:nth-child(n+3) { border-top: 1px solid var(--linha); }
+  .regras { grid-template-columns: minmax(0, 1fr); }
+  .pessoas { grid-template-columns: minmax(0, 1fr); }
+  .pessoa + .pessoa { padding-left: 0; border-left: 0; border-top: 1px solid var(--linha); }
+  .mvv article, .tempo li { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  section { padding: 44px 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="faixa" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <header class="topo">
+    <img src="img/logo-atual.png" alt="Sonnental energia" width="1100" height="272">
+    <nav class="indice" aria-label="Seções">
+      <a href="#significado">Significado</a>
+      <a href="#construcao">Como foi feito</a>
+      <a href="#historia">Histórico</a>
+      <a href="#manual">Como usar</a>
+      <a href="#arquivos">Arquivos</a>
+      <a href="#construir3d">Construir em 3D</a>
+      <a href="#proposito">Missão, visão e valores</a>
+      <a href="#pessoas">Quem começou</a>
+    </nav>
+  </header>
+
+  <div class="abre">
+    <div>
+      <p class="sobre-titulo">a nossa marca</p>
+      <h1>Vale do sol</h1>
+      <p class="lead">Sonnental vem do alemão e quer dizer vale do sol. O símbolo é um sol envolvido por uma fita em espiral, em três cores.</p>
+      <p class="lead">Esta página conta de onde a marca veio, o que cada parte significa, como usar e o que a Sonnental se propõe a fazer. Ao lado, a esfera de 2026, que é a referência para qualquer versão física do símbolo.</p>
+    </div>
+
+    <div class="visor">
+      <div class="palco" id="palco">
+        <img class="reserva" src="img/esfera-estatica.png" alt="Símbolo da Sonnental em 3D, visto de frente" width="700" height="700">
+        <canvas id="tela" tabindex="0" role="img" aria-label="Símbolo da Sonnental em 3D. Arraste para girar ou use as setas do teclado."></canvas>
+      </div>
+      <div class="controles">
+        <div class="grupo" role="group" aria-label="Versão do símbolo">
+          <button type="button" id="b-teste" aria-pressed="true">3D de 2026</button>
+          <button type="button" id="b-original" aria-pressed="false">Original de 2018</button>
+        </div>
+        <div class="grupo" role="group" aria-label="Vista">
+          <button type="button" data-vista="frente">Frente</button>
+          <button type="button" data-vista="tras">Trás</button>
+          <button type="button" data-vista="lado">Lado</button>
+          <button type="button" data-vista="cima">De cima</button>
+        </div>
+        <label class="girar" for="auto"><input type="checkbox" id="auto" checked> Girar sozinho</label>
+      </div>
+      <p class="dica" id="dica">Arraste para girar. A fita é uma peça só: sai da calota azul, passa por trás, vira a faixa cinza na frente e termina na calota verde.</p>
+    </div>
+  </div>
+</div>
+
+<section id="significado">
+  <div class="wrap">
+    <div class="cab">
+      <h2>O que o símbolo quer dizer</h2>
+      <p>O estudo que deu origem à marca, de 2018, partiu do lugar onde a empresa nasceu.</p>
+    </div>
+    <div class="duas">
+      <div class="texto">
+        <p>O Vale do Taquari é feito de montanhas, planícies e relevos, com clima de serra e belas vistas. O estudo dizia que o sol que bate nas cidades traz o calor e a energia que permeiam o povo, mas que esse potencial ainda não era conhecido nem explorado. As energias renováveis davam a casas e indústrias a chance de ter independência energética e gastar menos.</p>
+        <p>O desenho junta seis ideias: terra, sol, ventos, água, humano e tecnologia. A proposta era trazer os elementos naturais para dentro da marca junto com uma tecnologia que integrasse as pessoas e abrisse possibilidades de crescimento.</p>
+        <p>O sol fica no centro. A fita em volta dele representa, nas palavras do estudo, a envolvência e a sinergia com o todo: um abraço.</p>
+        <blockquote>Essa identidade age como uma visionária da tecnologia para o mundo das pessoas mais sinérgicas, onde a transparência da tecnologia não interfere no ecossistema do planeta.</blockquote>
+        <p>O nome foi escolhido pensando num negócio local que pudesse, um dia, sair do país sem precisar mudar de nome.</p>
+      </div>
+      <figure>
+        <img class="limpa" src="img/conceito-2018.jpg" alt="Diagrama do estudo de 2018 com as palavras terra, sol, tecnologia, humano, água e ventos em volta de um círculo" width="900" height="677">
+        <figcaption>As seis ideias do estudo de 2018.</figcaption>
+      </figure>
+    </div>
+
+    <div class="cores">
+      <div class="cor" style="--c: var(--azul)"><div class="amostra"></div><div class="info"><span class="nome">Azul</span><span class="sig">Tecnologia. O mar.</span><button type="button" data-hex="#045AA0" aria-label="Copiar o código do azul, #045AA0">#045AA0</button></div></div>
+      <div class="cor" style="--c: var(--amarelo)"><div class="amostra"></div><div class="info"><span class="nome">Amarelo</span><span class="sig">O núcleo: o sol e todas as energias que temos na Terra, em movimento.</span><button type="button" data-hex="#F7BF13" aria-label="Copiar o código do amarelo, #F7BF13">#F7BF13</button></div></div>
+      <div class="cor" style="--c: var(--cinza)"><div class="amostra"></div><div class="info"><span class="nome">Cinza</span><span class="sig">Elegância e sobriedade. O ar.</span><button type="button" data-hex="#99A7AA" aria-label="Copiar o código do cinza, #99A7AA">#99A7AA</button></div></div>
+      <div class="cor" style="--c: var(--verde)"><div class="amostra"></div><div class="info"><span class="nome">Verde</span><span class="sig">Sustentabilidade. A terra.</span><button type="button" data-hex="#BFBF32" aria-label="Copiar o código do verde, #BFBF32">#BFBF32</button></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="construcao">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Como o símbolo foi feito</h2>
+      <p>O símbolo nasceu em três dimensões, e só depois virou desenho plano.</p>
+    </div>
+    <div class="duas">
+      <div class="texto">
+        <p>Quem criou a marca foi o designer Lorenzo, o Lore. O estudo de 2018 guarda um esboço a lápis e o modelo que ele fez no Rhinoceros, um programa de desenho 3D.</p>
+        <p>A construção é simples de imaginar. Pegue uma esfera oca com um sol dentro. Agora descasque essa esfera como quem descasca uma maçã, tirando uma tira em espiral. O que sobra é uma fita só, contínua: começa na calota de cima, dá a volta por trás, passa na frente como a faixa do meio, dá outra volta por trás e termina na calota de baixo.</p>
+        <p>O estudo explicava a escolha: uma marca em três dimensões fica mais palpável e aproxima a empresa do cliente.</p>
+        <p>Depois o modelo foi planificado no Illustrator e colorido. As partes escuras que aparecem na logo são o lado de dentro da fita, visto pelas aberturas.</p>
+        <p>O arquivo 3D original se perdeu com o tempo. Em novembro de 2026 a esfera foi refeita a partir das medidas da marca de 2018, agora perfeitamente redonda e com a fita na mesma largura em toda a volta. Essa esfera é a referência oficial para qualquer réplica física do símbolo. No visualizador do topo dá para alternar entre ela e a reconstrução do modelo original, feita a partir da única imagem que sobrou dele e mostrada nas cores provisórias do programa.</p>
+      </div>
+      <div style="display:grid; gap:26px">
+        <figure>
+          <img src="img/esboco-rhino-2018.jpg" alt="À esquerda, esboço a lápis do símbolo. À direita, o modelo 3D no Rhinoceros, uma fita azul-esverdeada em espiral em volta de uma esfera laranja" width="1362" height="500">
+          <figcaption>O esboço e o modelo no Rhinoceros, 2018.</figcaption>
+        </figure>
+        <figure>
+          <img class="limpa" src="img/construcao-2018.jpg" alt="Três etapas do símbolo: contorno, cores chapadas e versão com volume" width="1100" height="240">
+          <figcaption>Do contorno ao volume, na primeira versão.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="cab">
+      <h2>A marca ao longo do tempo</h2>
+      <p>O símbolo é o mesmo desde o começo. O que mudou foi o letreiro, a assinatura e o acabamento.</p>
+    </div>
+    <ol class="tempo">
+      <li>
+        <div class="ano">2018<small>março</small></div>
+        <div class="oque">
+          <h3>Primeira identidade</h3>
+          <p>A Sonnental começa a trabalhar em 2018. O estudo da marca usa a assinatura “energy solutions” e o primeiro manual, “energia renovável”. O letreiro é em Open Sans, com azul e verde mais claros. A frase da época: “Fazendo o futuro, agora.”</p>
+          <img src="img/logo-2018.png" alt="Logo de 2018: símbolo e o nome Sonnental com a assinatura energy solutions" width="572" height="154">
+        </div>
+      </li>
+      <li>
+        <div class="ano">2019<small>janeiro</small></div>
+        <div class="oque">
+          <h3>Revisão da marca</h3>
+          <p>O nome é redesenhado em Ginora Sans e a assinatura passa a ser só “energia”. O projeto de revisão compara a marca anterior com a corrigida e anota três pontos do letreiro: dois tipos de letra “a”, falta de fechamento e simetria. As cores ficam mais sóbrias e viram as quatro do manual que vale até hoje.</p>
+          <img src="img/logo-2019.png" alt="Logo de 2019: símbolo e o nome Sonnental com a assinatura energia" width="900" height="240">
+        </div>
+      </li>
+      <li>
+        <div class="ano">2021<small>maio e junho</small></div>
+        <div class="oque">
+          <h3>Missão, visão e valores</h3>
+          <p>Duas reuniões, em 26 de maio e 28 de junho, definem qual é o negócio da Sonnental e escrevem a missão, a visão e os valores. Em 2023 o texto é publicado para a equipe e os clientes.</p>
+        </div>
+      </li>
+      <li>
+        <div class="ano">2025</div>
+        <div class="oque">
+          <h3>Símbolo redesenhado</h3>
+          <p>As curvas do símbolo são refeitas, porque o desenho plano não batia bem com a esfera. É a versão em uso.</p>
+          <img src="img/logo-atual.png" alt="Logo atual da Sonnental" width="1100" height="272">
+        </div>
+      </li>
+      <li>
+        <div class="ano">2026<small>novembro</small></div>
+        <div class="oque">
+          <h3>De volta às três dimensões</h3>
+          <p>O símbolo é reconstruído em 3D como uma esfera perfeita, com a fita na mesma largura em toda a volta. Ela vira a referência para qualquer versão física da marca: a esfera impressa do tamanho de uma bola de futebol, com 22 cm de diâmetro, e, no futuro, uma escultura ou uma aplicação na fachada.</p>
+          <p>Também se testou levar essa esfera para a marca plana. Vista de frente, ela perde a leitura de “S” que o símbolo ganhou com o tempo, então a decisão foi manter a marca 2D de 2025.</p>
+          <p>Na mesma revisão, o azul do degradê de 2025, que tinha ficado mais claro e acinzentado, voltou aos tons do arquivo de 2019. Desenho, versão chapada e cores oficiais continuam os mesmos.</p>
+          <img src="img/esfera-estatica.png" alt="Esfera de 2026 vista de frente" width="700" height="700" style="max-width:180px">
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="manual">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Como usar a marca</h2>
+      <p>A marca em uso é a versão de 2025. Aqui estão as regras do Manual de Identidade Visual, resumidas, e todas as aplicações da marca.</p>
+    </div>
+    <div class="regras">
+      <div class="regra">
+        <h3>Logo 3D é o principal</h3>
+        <p>A versão com volume e degradê é a principal. Use em telas e em impressos, sempre sobre fundo branco.</p>
+      </div>
+      <div class="regra">
+        <h3>Logo chapado para o resto</h3>
+        <p>A versão sem degradê serve para aplicar sobre fotos e em materiais como estampas e adesivos. Sobre azul, cinza ou verde, o logo vai todo em branco.</p>
+      </div>
+      <div class="regra">
+        <h3>Tamanho mínimo</h3>
+        <p><span class="num">6 × 6,5 mm</span> para o símbolo sozinho.<br><span class="num">26 × 6 mm</span> para o logo com o nome. Abaixo disso perde leitura.</p>
+      </div>
+      <div class="regra">
+        <h3>Margem de segurança</h3>
+        <p>Deixe um espaço livre em volta. A medida é o diâmetro do sol do símbolo: uma medida inteira em volta do logo com o nome, meia medida em volta do símbolo sozinho.</p>
+      </div>
+      <div class="regra">
+        <h3>Letras</h3>
+        <div class="fontes">
+          <span class="a">Ginora Sans</span>
+          <span class="b">Open Sans Bold Italic</span>
+        </div>
+        <p>Ginora Sans no nome. Open Sans em negrito itálico na assinatura “energia”.</p>
+      </div>
+      <div class="regra">
+        <h3>Cores</h3>
+        <p>As quatro cores estão na seção de significado, com o código de cada uma. Toque no código para copiar.</p>
+      </div>
+      <div class="regra">
+        <h3>Réplicas em 3D</h3>
+        <p>Para qualquer peça física do símbolo, como impressão 3D, escultura ou fachada, use a esfera de 2026: redonda, com a fita na mesma largura em toda a volta. No papel e na tela, vale a marca 2D de 2025.</p>
+      </div>
+    </div>
+    <div class="vprincipal">
+      <img src="img/m25/marca-degrade.svg" alt="Marca Sonnental energia com degradê, versão principal" width="836" height="228">
+    </div>
+    <p style="margin-top:14px; color:var(--tinta-suave)">Versão principal, com degradê. Para telas e impressos sobre fundo branco.</p>
+
+    <div class="vgrade">
+      <div class="vitem">
+        <div class="vquadro"><img src="img/m25/marca-chapada.svg" alt="Marca chapada, sem degradê" width="836" height="228" loading="lazy"></div>
+        <h3>Chapada</h3>
+        <p>Sem degradê. Para aplicar sobre fotos e em estampas e adesivos. A faixa cinza continua translúcida, deixando o sol aparecer.</p>
+      </div>
+      <div class="vitem">
+        <div class="vquadro"><div class="vpar">
+          <img src="img/m25/simbolo-degrade.svg" alt="Símbolo com degradê" width="229" height="214" loading="lazy">
+          <img src="img/m25/simbolo-chapado.svg" alt="Símbolo chapado" width="229" height="214" loading="lazy">
+        </div></div>
+        <h3>Símbolo sozinho</h3>
+        <p>Com degradê ou chapado, quando o nome já aparece por perto ou o espaço é pequeno, como em ícones e perfis.</p>
+      </div>
+      <div class="vitem">
+        <div class="vpilha">
+          <div style="background:#007DD0"><img src="img/m25/marca-branca.svg" alt="Marca em contorno branco sobre azul" width="836" height="228" loading="lazy"></div>
+          <div style="background:#94A9AC"><img src="img/m25/marca-branca.svg" alt="Marca em contorno branco sobre cinza" width="836" height="228" loading="lazy"></div>
+          <div style="background:#C1C112"><img src="img/m25/marca-branca.svg" alt="Marca em contorno branco sobre verde" width="836" height="228" loading="lazy"></div>
+          <div style="background:#1E2A2F"><img src="img/m25/marca-branca-solida.svg" alt="Marca branca preenchida sobre fundo escuro" width="836" height="228" loading="lazy"></div>
+        </div>
+        <h3>Branca</h3>
+        <p>Em contorno sobre o azul, o cinza ou o verde da marca. Preenchida sobre fundos escuros ou fotos.</p>
+      </div>
+      <div class="vitem">
+        <div class="vquadro"><div class="vpar">
+          <img src="img/m25/simbolo-solido.svg" alt="Símbolo em uma cor, preenchido" width="229" height="214" loading="lazy">
+          <img src="img/m25/simbolo-contorno.svg" alt="Símbolo em uma cor, só o contorno" width="229" height="214" loading="lazy">
+        </div></div>
+        <div class="vquadro"><img src="img/m25/marca-preta.svg" alt="Marca inteira em preto, preenchida" width="836" height="228" loading="lazy"></div>
+        <div class="vquadro"><img src="img/m25/marca-contorno-preto.svg" alt="Marca inteira em preto, com o símbolo em contorno" width="836" height="228" loading="lazy"></div>
+        <h3>Uma cor e preta</h3>
+        <p>Preenchida ou em contorno, para carimbo, gravação, bordado e impressão em uma tinta.</p>
+      </div>
+      <div class="vitem">
+        <div class="vquadro"><img src="img/m25/margem-marca.svg" alt="Margem de segurança da marca: uma medida x em volta, x é o diâmetro do sol" width="1061" height="452" loading="lazy"></div>
+        <h3>Margem da marca</h3>
+        <p>Uma medida x livre em volta. O x é o diâmetro do sol.</p>
+      </div>
+      <div class="vitem">
+        <div class="vquadro"><img src="img/m25/margem-simbolo.svg" alt="Margem de segurança do símbolo: meia medida x em volta" width="333" height="318" loading="lazy" style="max-width:260px"></div>
+        <h3>Margem do símbolo</h3>
+        <p>Meia medida x livre em volta do símbolo sozinho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="arquivos">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Arquivos da marca</h2>
+      <p>Escolha a versão, confira ao lado e baixe no formato que precisar. SVG e PDF são vetor (não perdem qualidade em nenhum tamanho); PNG é imagem com fundo transparente.</p>
+    </div>
+    <div class="arq">
+      <div class="arq-lista" id="arq-lista"></div>
+      <div class="arq-painel" aria-live="polite">
+        <div class="arq-previa" id="arq-previa"><img id="arq-img" src="dl/2d/svg/sonnental-marca-degrade.svg" alt="Prévia da versão escolhida"></div>
+        <div class="arq-info">
+          <h3 id="arq-nome">Marca com degradê</h3>
+          <p id="arq-desc">Versão principal. Telas e impressos sobre fundo branco.</p>
+          <div class="arq-formatos" id="arq-formatos"></div>
+          <p class="arq-msg" id="arq-msg"></p>
+        </div>
+      </div>
+    </div>
+    <p class="arq-drive">Para trabalhar com a marca usando qualquer IA, baixe o <a href="dl/guia-da-marca-sonnental.md" download>guia da marca</a>, anexe na conversa e peça para seguir as regras dele.</p>
+  </div>
+</section>
+
+<section id="construir3d">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Como construir a esfera em 3D</h2>
+      <p>A descrição completa da geometria, para quem precisar refazer a esfera em qualquer programa de 3D ou pedir a outra IA. O kit de construção, na seção de arquivos, traz tudo isto mais as tabelas e um script pronto.</p>
+    </div>
+    <div class="c3d">
+      <div>
+        <h3>A ideia</h3>
+        <p>A esfera é uma casca oca com um sol (uma esfera menor) no centro. Da casca foi retirada uma tira em espiral, como quem descasca uma maçã. O que sobra é uma fita única e contínua: começa na calota de cima, dá voltas em torno do sol e termina na calota de baixo. As calotas são as duas pontas da fita, e não peças inteiras. Girando 180° em torno do eixo que vai da frente para trás, o símbolo fica igual.</p>
+      </div>
+      <div>
+        <h3>Convenções</h3>
+        <ul>
+          <li>O eixo z é vertical, para cima. A frente do símbolo é o lado voltado para quem olha (no Blender, −Y).</li>
+          <li><b>θ</b> é o ângulo em volta do eixo vertical, em graus: 0 no meio da frente, 90 na lateral direita de quem olha, 180 nas costas, 270 na lateral esquerda. Como a espiral dá mais de uma volta, θ passa de 360; θ e θ+360 caem no mesmo meridiano, uma volta acima.</li>
+          <li><b>φ</b> é a latitude, em graus: 0 no equador, +90 no polo de cima.</li>
+          <li>Um ponto de raio r fica em x = r·cos φ·sen θ, y = −r·cos φ·cos θ, z = r·sen φ.</li>
+          <li>A fenda retirada tem uma borda de baixo, φ_inf(θ), e uma de cima, φ_sup(θ). Em cada θ, tudo o que está na casca entre as duas é retirado. A borda de baixo é o topo da fita da volta de baixo; a de cima é a base da fita da volta de cima ou, na última volta, a borda da calota.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Versão 2026, oficial para qualquer réplica física</h3>
+        <div class="scroll"><table class="tabela">
+          <tr><th>Item</th><th>Valor</th></tr>
+          <tr><td>Esfera</td><td>perfeita, raio externo R. Na bola impressa, R = 110 mm (22 cm de diâmetro)</td></tr>
+          <tr><td>Casca</td><td>4 mm de espessura em R = 110 (R/27,5)</td></tr>
+          <tr><td>Sol</td><td>esfera concêntrica de raio 0,66·R (diâmetro 145 mm)</td></tr>
+          <tr><td>Fita</td><td>37° de latitude de largura, constante em toda a volta</td></tr>
+          <tr><td>Fenda</td><td>21° de latitude, constante, fechando em ponta viva nas duas calotas</td></tr>
+          <tr><td>Passo</td><td>58° de latitude por volta: K = 58/360 = 0,16111</td></tr>
+          <tr><td>Extensão da fenda</td><td>θ de −185° a 545° (2,03 voltas)</td></tr>
+        </table></div>
+        <p style="margin-top:16px">Bordas da fenda, em graus:</p>
+        <pre class="formula">1. Base da fita da volta de cima, θ ≤ 185:
+   φ_sup(θ) = K·θ − 18,5
+
+2. Topo da fita da volta de baixo, θ ≥ 175:
+   φ_inf(θ) = K·(θ − 360) + 18,5
+
+3. Borda da calota de cima, θ > 185:
+   até θ_A = 389,655   φ_sup(θ) = K·(θ − 360) + 39,5
+   até θ_B = 439,655   φ_sup(θ) = 48,306 − (K/100)·(θ_B − θ)²
+   até θ = 545         φ_sup(θ) = 48,306
+   (em θ = 545 as duas bordas valem 48,306: a fenda fecha em ponta)
+
+4. Metade de baixo, por simetria, θ &lt; 175:
+   φ_inf(θ) = −φ_sup(360 − θ)</pre>
+        <p style="margin-top:16px">Peças para impressão, cada uma de uma cor:</p>
+        <div class="scroll"><table class="tabela">
+          <tr><th>Peça</th><th>Região</th><th>Cor</th></tr>
+          <tr><td>Cinza</td><td>só a faixa da frente: θ de −100° a +100°, entre φ_sup(θ) e φ_inf(θ+360). Cortes retos em θ = ±100°, 10° atrás das laterais</td><td>#99A7AA, de preferência translúcido</td></tr>
+          <tr><td>Azul</td><td>calota de cima e a volta da fita que passa por trás, em cima</td><td>#045AA0</td></tr>
+          <tr><td>Verde</td><td>a volta de baixo que passa por trás e a calota de baixo</td><td>#BFBF32</td></tr>
+          <tr><td>Sol</td><td>esfera de 0,66·R</td><td>amarelo-ouro (#F7BF13)</td></tr>
+        </table></div>
+        <p style="margin-top:12px; color:var(--tinta-suave)">Conferência com R = 110 mm: casca inteira 428,1 cm³; peças azul 163,1, cinza 102,0 e verde 163,1 cm³.</p>
+      </div>
+      <div>
+        <h3>Versão 2018, reconstrução do modelo original</h3>
+        <ul>
+          <li>O arquivo do Rhinoceros se perdeu. Esta versão foi reconstruída em novembro de 2026 a partir da única imagem que restou do modelo (vista de frente) e do desenho de 2018.</li>
+          <li>Esfera achatada: altura = 0,93 × largura. Sol de raio 0,615·R, mantido redondo, porque a imagem não permite saber se era achatado.</li>
+          <li>Fenda de θ = −240° a 600° (2,33 voltas), com a fita entre 31° e 33°, quase constante. As bordas não seguem uma fórmula simples: estão na tabela esfera_2018_bordas.csv do kit, uma linha por grau, antes do achatamento. Monte a casca redonda e depois escale só o eixo z por 0,93.</li>
+          <li>As costas não aparecem na imagem; foram deduzidas pela mesma simetria de 180° da frente.</li>
+          <li>As cores do Rhino eram provisórias: fita azul-esverdeada e sol laranja.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Passo a passo em qualquer programa</h3>
+        <ol>
+          <li>Crie uma esfera de raio R e subtraia outra de raio R menos a espessura. Isso é a casca.</li>
+          <li>Para cada θ (de grau em grau, ou mais fino), marque na esfera os pontos (θ, φ_inf) e (θ, φ_sup). Ligue os de baixo numa curva e os de cima noutra.</li>
+          <li>Monte o sólido de corte: em cada θ, um setor fino que vai de 0,45·R até 1,5·R, entre as duas latitudes. Una os setores em sequência (loft ou sweep) e subtraia da casca.</li>
+          <li>Coloque o sol no centro: 0,66·R (0,615·R na versão 2018).</li>
+          <li>Para as peças da versão 2026, corte a casca com o sólido da faixa da frente (θ de −100° a +100°). O resto se separa em duas partes: a de cima é a azul e a de baixo, a verde.</li>
+        </ol>
+        <p style="margin-top:14px; color:var(--tinta-suave)">No Rhino ou Grasshopper: pontos pelas fórmulas, Interpolate Curve nas bordas, Split na superfície e espessura para dentro. No Blender: rode o script ou importe os STL; para editar, Solidify de 4 mm para dentro. No Fusion 360 ou SolidWorks: importe os pontos como spline 3D e use Split Body. No OpenSCAD: o sólido de corte vira um polyhedron dentro de difference().</p>
+      </div>
+      <div class="prompt">
+        <h3>Texto para pedir a outra IA</h3>
+        <p id="txt-ia">Modele em 3D a esfera do símbolo da Sonnental. É uma casca esférica oca, raio externo R = 110 mm, espessura 4 mm, com uma esfera maciça concêntrica de raio 72,6 mm dentro (o sol). Da casca é retirada uma fenda em espiral, como a casca de uma maçã descascada, deixando uma fita única de 37 graus de latitude de largura, constante. A fenda tem 21 graus de latitude, constante. Use θ como azimute (0 na frente, que é −Y, crescendo para a direita de quem olha, passando de 360) e φ como latitude. A fenda vai de θ = −185 a 545 graus. Borda de cima da fenda: φ = 0,16111·θ − 18,5 para θ ≤ 185. Borda de baixo: φ = 0,16111·(θ − 360) + 18,5 para θ ≥ 175. Na última volta, a borda da calota de cima segue φ = 0,16111·(θ − 360) + 39,5 até θ = 389,655, depois φ = 48,306 − 0,0016111·(439,655 − θ)² até θ = 439,655, e fica em 48,306 até θ = 545, onde a fenda fecha em ponta. A metade de baixo é simétrica: φ_inf(θ) = −φ_sup(360 − θ) para θ &lt; 175. Divida a casca em 3 peças: cinza é a faixa da frente entre θ = −100 e +100; o resto em cima é azul (#045AA0) e embaixo verde (#BFBF32). Volumes de conferência: casca 428,1 cm³, peças 163,1 / 102,0 / 163,1 cm³.</p>
+        <button type="button" id="copiar-ia">Copiar texto</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proposito">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Missão, visão e valores</h2>
+      <p>O jeito Sonnental de pensar e trabalhar, como foi publicado em 2023.</p>
+    </div>
+    <div class="mvv">
+      <article>
+        <div class="rot">missão</div>
+        <div>
+          <p class="frase">Otimizar sistemas energéticos através da customização de produtos e serviços.</p>
+          <p class="expl">Analisamos a fundo as particularidades e necessidades dos nossos clientes, personalizando os projetos e assim otimizando a geração de energia.</p>
+        </div>
+      </article>
+      <article>
+        <div class="rot">visão</div>
+        <div>
+          <p class="frase">Democratizar a energia, produzindo bem-estar e ganhos econômicos para clientes, empresa e sociedade.</p>
+          <p class="expl">Assessoramos nossos clientes, trazendo um entendimento completo sobre sua forma de consumo e quais as melhores estratégias para reduções de custos.</p>
+        </div>
+      </article>
+      <article>
+        <div class="rot">valores</div>
+        <div>
+          <ul class="valores">
+            <li>Inteligência, inovação e tecnologia</li>
+            <li>Orientação pelo mercado</li>
+            <li>Autoperformance</li>
+            <li>Potencialização humana</li>
+            <li>Sensibilidade social</li>
+          </ul>
+          <p class="expl">Nos preocupamos em desenvolver pessoas e buscamos isso através da excelência no nosso trabalho.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="origem">
+      <h3>De onde isso veio</h3>
+      <p>As reuniões de 2021 começaram por uma pergunta: qual é o nosso negócio? A resposta deixou de ser um produto, como painéis solares, e passou a ser uma solução.</p>
+      <dl>
+        <dt>O negócio</dt><dd>Estratégias energéticas.</dd>
+        <dt>O cliente</dt><dd>Consumidores e organizações envolvidas com energia.</dd>
+        <dt>O que ele precisa</dt><dd>Otimização de sistemas energéticos.</dd>
+        <dt>O nosso diferencial</dt><dd>Personalização.</dd>
+      </dl>
+      <p>Duas anotações daquelas reuniões ajudam a entender o espírito. A primeira: valores não dizem o que vamos fazer, dizem como. A segunda: estar disposto a perder uma venda por causa dos nossos valores e da nossa missão.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pessoas">
+  <div class="wrap">
+    <div class="cab">
+      <h2>Quem começou</h2>
+      <p>O plano de 2018 dividia a empresa entre três sócios. A marca foi criada pelo designer Lorenzo.</p>
+    </div>
+    <div class="pessoas">
+      <div class="pessoa">
+        <h3>Guilherme W. Eckert</h3>
+        <span class="cargo">técnico</span>
+        <p>Projeto elétrico, supervisão das instalações, manutenção e busca de novas tecnologias.</p>
+      </div>
+      <div class="pessoa">
+        <h3>Willian Wagner</h3>
+        <span class="cargo">operações</span>
+        <p>Abertura e burocracia da empresa, financeiro e pagamento de fornecedores.</p>
+      </div>
+      <div class="pessoa">
+        <h3>Nelson de Vargas</h3>
+        <span class="cargo">comercial</span>
+        <p>Vendas para pessoas e para empresas e negociação com os clientes.</p>
+      </div>
+    </div>
+    <div class="texto" style="margin-top:34px">
+      <p>O mesmo plano descrevia o problema que a empresa queria resolver: as pessoas do vale não conheciam a possibilidade de gerar a própria energia, e faltava quem explicasse bem.</p>
+      <p>Hoje a Sonnental fica em Estrela, no Rio Grande do Sul, e tem Guilherme e Willian como sócios.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Fontes: estudo e manual da marca de 2018, projeto de revisão e Manual de Identidade Visual de 2019, registros das reuniões de missão, visão e valores de 2021 e texto publicado em 2023.</p>
+    <p>Página montada em novembro de 2026.</p>
+  </div>
+</footer>
+<div class="faixa" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  // copiar código de cor
+  document.querySelectorAll("button[data-hex]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var hex = b.dataset.hex;
+      var volta = function (t) { b.textContent = t; setTimeout(function () { b.textContent = hex; }, 1400); };
+      try { navigator.clipboard.writeText(hex).then(function () { volta("copiado"); }, function () { volta(hex); }); }
+      catch (e) { volta(hex); }
+    });
+  });
+
+  var palco = document.getElementById("palco"), tela = document.getElementById("tela"), dica = document.getElementById("dica");
+  var DICAS = {
+    teste: "Arraste para girar. A fita é uma peça só: sai da calota azul, passa por trás, vira a faixa cinza na frente e termina na calota verde.",
+    original: "Reconstrução do modelo de 2018, nas cores provisórias do programa de 3D. Ele era um pouco mais largo do que alto e a fita tinha proporções diferentes das da logo de hoje."
+  };
+  if (!window.THREE) { tela.style.display = "none"; return; }
+  var T = window.THREE;
+  var renderer;
+  try { renderer = new T.WebGLRenderer({ canvas: tela, antialias: true, alpha: true }); }
+  catch (e) { tela.style.display = "none"; return; }
+  renderer.outputEncoding = T.sRGBEncoding;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  var cena = new T.Scene();
+  var cam = new T.PerspectiveCamera(14, 1, 0.1, 50); cam.position.set(0, 0, 10.2);
+  cena.add(new T.HemisphereLight(0xffffff, 0xaab4b8, 0.95));
+  var sol1 = new T.DirectionalLight(0xffffff, 0.75); sol1.position.set(-2.2, 3, 4); cena.add(sol1);
+  var sol2 = new T.DirectionalLight(0xffffff, 0.25); sol2.position.set(3, -1, 2); cena.add(sol2);
+  var grupo = new T.Group(); cena.add(grupo);
+
+  var COR = {
+    teste: { azul: "#045AA0", cinza: "#99A7AA", verde: "#BFBF32", azulDentro: "#03406F", cinzaDentro: "#8B999C", verdeDentro: "#8A8B1C", sol: "#D49206", brilho: 0.05 },
+    original: { fita: "#17A7A2", dentro: "#0F7F86", sol: "#E0661A" }
+  };
+  function lin(hex) { return new T.Color(hex).convertSRGBToLinear(); }
+
+  function montar(m, nome) {
+    var S = m.s, E = m.e, RI = 1 - 4 / 110, pal = COR[m.pal || nome];
+    function amostra(arr, th) { var x = Math.min(Math.max(th, S), E) - S, i = Math.floor(x), f = x - i; return i >= arr.length - 1 ? arr[arr.length - 1] : arr[i] * (1 - f) + arr[i + 1] * f; }
+    var Q = function (th) { return amostra(m.q, th); }, P = function (th) { return amostra(m.p, th); };
+    var regioes = [
+      { a: S, b: S + 360, lo: function () { return -1; }, hi: Q, tipo: "baixo", nz: 30 },
+      { a: S, b: E - 360, lo: P, hi: function (th) { return Q(th + 360); }, tipo: "fita", nz: 8 },
+      { a: E - 360, b: E, lo: P, hi: function () { return 1; }, tipo: "cima", nz: 30 }
+    ];
+    var OP = { pos: [], nor: [], col: [] }, TR = { pos: [], nor: [], col: [] };
+    function pt(th, z, r) { z = Math.max(-1, Math.min(1, z)); var rho = Math.sqrt(1 - z * z), a = th * Math.PI / 180; return [r * rho * Math.sin(a), r * z, r * rho * Math.cos(a)]; }
+    function tri(a, b, c, na, nb, nc, cz) {
+      var d = cz.t ? TR : OP, cor = cz.c;
+      d.pos.push(a[0], a[1], a[2], b[0], b[1], b[2], c[0], c[1], c[2]);
+      d.nor.push(na[0], na[1], na[2], nb[0], nb[1], nb[2], nc[0], nc[1], nc[2]);
+      for (var k = 0; k < 3; k++) d.col.push(cor.r, cor.g, cor.b);
+    }
+    function plano(a, b, c, d, cor) {
+      var u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], v = [d[0] - a[0], d[1] - a[1], d[2] - a[2]];
+      var n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]], L = Math.hypot(n[0], n[1], n[2]) || 1;
+      n = [n[0] / L, n[1] / L, n[2] / L]; tri(a, b, c, n, n, n, cor); tri(a, c, d, n, n, n, cor);
+    }
+    function cores(tipo, th) {
+      if (pal.fita) return [{ c: lin(pal.fita) }, { c: lin(pal.dentro) }];
+      var zona = function (c) { return tipo === "cima" ? "azul" : tipo === "baixo" ? "verde" : th > c ? "azul" : th < -c ? "verde" : "cinza"; };
+      var zo = zona(m.cut), zi = zona(m.cutIn || m.cut);
+      return [{ c: lin(pal[zo]), t: !!m.transl && zo === "cinza" }, { c: lin(pal[zi + "Dentro"]), t: !!m.transl && zi === "cinza" }];
+    }
+    var D = 2.5, ANEIS = [];
+    for (var an = -88; an <= 88; an += 2) ANEIS.push(Math.sin(an * Math.PI / 180));
+    regioes.forEach(function (g) {
+      var n = Math.round((g.b - g.a) / D), Dg = (g.b - g.a) / n;
+      for (var i = 0; i < n; i++) {
+        var t0 = g.a + i * Dg, t1 = i === n - 1 ? g.b : g.a + (i + 1) * Dg, cc = cores(g.tipo, (t0 + t1) / 2);
+        var l0 = g.lo(t0), h0 = Math.max(g.hi(t0), l0), l1 = g.lo(t1), h1 = Math.max(g.hi(t1), l1);
+        // aneis de latitude fixos e iguais para todas as colunas, para as malhas vizinhas casarem sem fresta
+        var za0 = Math.max(l0, l1), zb0 = Math.min(h0, h1), lev = [[l0, l1]];
+        for (var q = 0; q < ANEIS.length; q++) if (ANEIS[q] > za0 + 1e-4 && ANEIS[q] < zb0 - 1e-4) lev.push([ANEIS[q], ANEIS[q]]);
+        lev.push([h0, h1]);
+        for (var j = 0; j < lev.length - 1; j++) {
+          var za = lev[j][0], zb = lev[j][1], zc = lev[j + 1][1], zd = lev[j + 1][0];
+          var A = pt(t0, za, 1), B = pt(t1, zb, 1), C = pt(t1, zc, 1), Dd = pt(t0, zd, 1);
+          tri(A, B, C, A, B, C, cc[0]); tri(A, C, Dd, A, C, Dd, cc[0]);
+          var a = pt(t0, za, RI), b = pt(t1, zb, RI), c = pt(t1, zc, RI), d = pt(t0, zd, RI);
+          var neg = function (p) { return [-p[0] / RI, -p[1] / RI, -p[2] / RI]; };
+          if (!cc[1].t) { tri(a, c, b, neg(a), neg(c), neg(b), cc[1]); tri(a, d, c, neg(a), neg(d), neg(c), cc[1]); }
+        }
+        if (g.tipo !== "baixo" && !cc[1].t) plano(pt(t1, l1, 1), pt(t0, l0, 1), pt(t0, l0, RI), pt(t1, l1, RI), cc[1]);
+        if (g.tipo !== "cima" && !cc[1].t) plano(pt(t0, h0, 1), pt(t1, h1, 1), pt(t1, h1, RI), pt(t0, h0, RI), cc[1]);
+      }
+    });
+    function malha(d, mat) {
+      var geo = new T.BufferGeometry();
+      geo.setAttribute("position", new T.Float32BufferAttribute(d.pos, 3));
+      geo.setAttribute("normal", new T.Float32BufferAttribute(d.nor, 3));
+      geo.setAttribute("color", new T.Float32BufferAttribute(d.col, 3));
+      return new T.Mesh(geo, mat);
+    }
+    var casca = malha(OP, new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.5, metalness: 0.02, side: T.DoubleSide }));
+    var sol = new T.Mesh(new T.SphereGeometry(m.rs, 64, 40), new T.MeshStandardMaterial({ color: lin(pal.sol), emissive: lin(pal.sol), emissiveIntensity: pal.brilho === undefined ? 0.12 : pal.brilho, roughness: 0.55 }));
+    var g = new T.Group(); g.add(casca); g.add(sol);
+    if (TR.pos.length) {
+      var vidro = malha(TR, new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.3, metalness: 0.02, side: T.DoubleSide, transparent: true, opacity: m.transl, depthWrite: false }));
+      vidro.renderOrder = 2; g.add(vidro);
+    } g.scale.set(1, m.ky || 1, 1); return g;
+  }
+
+  var dados = null, modelo = null, atualNome = "teste";
+  var yaw = -0.5, pitch = 0.16, alvo = null, vel = 0, sujo = true;
+  var auto = document.getElementById("auto");
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) auto.checked = false;
+
+  function trocar(nome) {
+    if (!dados) return;
+    if (modelo) { grupo.remove(modelo); modelo.traverse(function (o) { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); }); }
+    modelo = montar(dados[nome], nome); grupo.add(modelo); atualNome = nome; sujo = true;
+    document.getElementById("b-original").setAttribute("aria-pressed", String(nome === "original"));
+    document.getElementById("b-teste").setAttribute("aria-pressed", String(nome === "teste"));
+    dica.textContent = DICAS[nome];
+  }
+  document.getElementById("b-original").addEventListener("click", function () { trocar("original"); });
+  document.getElementById("b-teste").addEventListener("click", function () { trocar("teste"); });
+
+  var VISTAS = { frente: [0, 0], tras: [Math.PI, 0.1], lado: [-Math.PI / 2, 0.1], cima: [0.35, 1.05] };
+  document.querySelectorAll("button[data-vista]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var v = VISTAS[b.dataset.vista], y = v[0];
+      while (y - yaw > Math.PI) y -= 2 * Math.PI; while (y - yaw < -Math.PI) y += 2 * Math.PI;
+      alvo = [y, v[1]]; auto.checked = false; vel = 0;
+    });
+  });
+
+  var arrastando = false, px = 0, py = 0, mouse = true;
+  tela.addEventListener("pointerdown", function (e) { arrastando = true; px = e.clientX; py = e.clientY; mouse = e.pointerType === "mouse"; alvo = null; vel = 0; auto.checked = false; try { tela.setPointerCapture(e.pointerId); } catch (x) {} });
+  tela.addEventListener("pointermove", function (e) {
+    if (!arrastando) return;
+    var dx = e.clientX - px, dy = e.clientY - py; px = e.clientX; py = e.clientY;
+    var k = 2.6 / tela.clientWidth; yaw += dx * k; vel = dx * k;
+    if (mouse) pitch = Math.max(-1.4, Math.min(1.4, pitch + dy * k));
+    sujo = true;
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(function (ev) { tela.addEventListener(ev, function () { arrastando = false; }); });
+  tela.addEventListener("keydown", function (e) {
+    var p = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1] }[e.key];
+    if (!p) return; e.preventDefault(); auto.checked = false; alvo = null; yaw += p[0]; pitch = Math.max(-1.4, Math.min(1.4, pitch + p[1])); sujo = true;
+  });
+  auto.addEventListener("change", function () { alvo = null; });
+
+  function medir() {
+    var w = palco.clientWidth, h = palco.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); sujo = true;
+  }
+  if (window.ResizeObserver) new ResizeObserver(medir).observe(palco); else window.addEventListener("resize", medir);
+  medir();
+
+  var antes = 0;
+  function quadro(t) {
+    var dt = Math.min(0.05, (t - antes) / 1000 || 0.016); antes = t;
+    if (alvo) {
+      yaw += (alvo[0] - yaw) * Math.min(1, dt * 6); pitch += (alvo[1] - pitch) * Math.min(1, dt * 6); sujo = true;
+      if (Math.abs(alvo[0] - yaw) < 0.002 && Math.abs(alvo[1] - pitch) < 0.002) { yaw = alvo[0]; pitch = alvo[1]; alvo = null; }
+    } else if (!arrastando) {
+      if (auto.checked) { yaw += dt * 0.35; sujo = true; }
+      else if (Math.abs(vel) > 0.0005) { yaw += vel; vel *= 0.93; sujo = true; }
+    }
+    if (sujo && modelo) { grupo.rotation.set(pitch, yaw, 0); renderer.render(cena, cam); sujo = false; }
+    requestAnimationFrame(quadro);
+  }
+
+  fetch("espiral.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) {
+    dados = j; trocar("teste"); palco.classList.add("pronto"); requestAnimationFrame(quadro);
+  }).catch(function () { tela.style.display = "none"; });
+})();
+</script>
+<script>
+{
+  var ITENS = [{"g": "marca", "f": "sonnental-marca-degrade", "n": "Marca com degradê", "d": "Versão principal. Telas e impressos sobre fundo branco.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-marca-degrade.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-degrade.svg", "s": "74 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-degrade.png", "s": "179 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-degrade.pdf", "s": "80 KB"}]}, {"g": "marca", "f": "sonnental-marca-chapada", "n": "Marca chapada", "d": "Sem degradê. Sobre fotos, estampas e adesivos.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-marca-chapada.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-chapada.svg", "s": "98 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-chapada.png", "s": "121 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-chapada.pdf", "s": "30 KB"}]}, {"g": "marca", "f": "sonnental-marca-preta", "n": "Marca preta", "d": "Uma tinta: carimbo, gravação, documentos em preto e branco.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-marca-preta.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-preta.svg", "s": "70 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-preta.png", "s": "81 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-preta.pdf", "s": "27 KB"}]}, {"g": "marca", "f": "sonnental-marca-preta-contorno", "n": "Marca preta em contorno", "d": "Símbolo só no traço, nome preenchido.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-marca-preta-contorno.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-preta-contorno.svg", "s": "140 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-preta-contorno.png", "s": "90 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-preta-contorno.pdf", "s": "44 KB"}]}, {"g": "marca", "f": "sonnental-marca-branca", "n": "Marca branca", "d": "Sobre fundos escuros e fotos.", "bg": "#1E2A2F", "prev": "dl/2d/svg/sonnental-marca-branca.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-branca.svg", "s": "70 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-branca.png", "s": "91 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-branca.pdf", "s": "27 KB"}]}, {"g": "marca", "f": "sonnental-marca-branca-contorno", "n": "Marca branca em contorno", "d": "Sobre o azul, o cinza ou o verde da marca.", "bg": "#045AA0", "prev": "dl/2d/svg/sonnental-marca-branca-contorno.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-marca-branca-contorno.svg", "s": "140 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-marca-branca-contorno.png", "s": "103 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-marca-branca-contorno.pdf", "s": "44 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-degrade", "n": "Símbolo com degradê", "d": "Ícones, perfis e quando o nome já aparece por perto.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-degrade.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-degrade.svg", "s": "65 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-degrade.png", "s": "262 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-degrade.pdf", "s": "74 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-chapado", "n": "Símbolo chapado", "d": "Sem degradê.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-chapado.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-chapado.svg", "s": "77 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-chapado.png", "s": "110 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-chapado.pdf", "s": "25 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-preto", "n": "Símbolo preto", "d": "Uma tinta, preenchido.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-preto.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-preto.svg", "s": "49 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-preto.png", "s": "78 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-preto.pdf", "s": "21 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-preto-contorno", "n": "Símbolo preto em contorno", "d": "Uma tinta, só o traço.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-preto-contorno.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-preto-contorno.svg", "s": "120 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-preto-contorno.png", "s": "98 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-preto-contorno.pdf", "s": "38 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-branco", "n": "Símbolo branco", "d": "Sobre fundos escuros.", "bg": "#1E2A2F", "prev": "dl/2d/svg/sonnental-simbolo-branco.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-branco.svg", "s": "49 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-branco.png", "s": "86 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-branco.pdf", "s": "21 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-branco-contorno", "n": "Símbolo branco em contorno", "d": "Sobre as cores da marca.", "bg": "#045AA0", "prev": "dl/2d/svg/sonnental-simbolo-branco-contorno.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-branco-contorno.svg", "s": "120 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-branco-contorno.png", "s": "114 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-branco-contorno.pdf", "s": "38 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-cinza", "n": "Símbolo cinza", "d": "Uma cor, como no manual de 2019.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-cinza.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-cinza.svg", "s": "49 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-cinza.png", "s": "115 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-cinza.pdf", "s": "21 KB"}]}, {"g": "simbolo", "f": "sonnental-simbolo-cinza-contorno", "n": "Símbolo cinza em contorno", "d": "Uma cor, só o traço.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-cinza-contorno.svg", "arq": [{"t": "SVG", "p": "dl/2d/svg/sonnental-simbolo-cinza-contorno.svg", "s": "120 KB"}, {"t": "PNG", "p": "dl/2d/png/sonnental-simbolo-cinza-contorno.png", "s": "160 KB"}, {"t": "PDF", "p": "dl/2d/pdf/sonnental-simbolo-cinza-contorno.pdf", "s": "38 KB"}]}, {"g": "3d", "f": "sonnental-esfera-2026-frente", "n": "Esfera 2026, de frente", "d": "Imagem da esfera em 3D, fundo transparente.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-esfera-2026-frente.png", "arq": [{"t": "PNG", "p": "dl/3d/sonnental-esfera-2026-frente.png", "s": "952 KB"}]}, {"g": "3d", "f": "sonnental-esfera-2026-tres-quartos", "n": "Esfera 2026, em três quartos", "d": "Imagem da esfera em 3D, fundo transparente.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-esfera-2026-tres-quartos.png", "arq": [{"t": "PNG", "p": "dl/3d/sonnental-esfera-2026-tres-quartos.png", "s": "1,0 MB"}]}, {"g": "3d", "f": "sonnental-marca-completa-3d", "n": "Marca completa em 3D", "d": "Esfera, letreiro e pedestal, fundo transparente.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-marca-completa-3d.png", "arq": [{"t": "PNG", "p": "dl/3d/sonnental-marca-completa-3d.png", "s": "345 KB"}]}, {"g": "3d", "f": "sonnental-esfera-2026-modelo-3d", "n": "Modelo 3D da esfera", "d": "O símbolo em 3D, limpo (sem furos nem encaixes), para abrir, girar e renderizar. O GLB já vem com as cores e abre no Visualizador 3D do Windows, no PowerPoint (Inserir › Modelos 3D) e no Blender. Os STL são as 4 partes sem cor, para qualquer programa de 3D.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-esfera-2026-tres-quartos.png", "arq": [{"t": "GLB com cores", "p": "dl/3d/modelo/sonnental-esfera-2026.glb", "s": "1,4 MB"}, {"t": "Blender", "p": "dl/3d/modelo/sonnental-esfera-2026.blend", "s": "1,6 MB"}, {"t": "STL calota azul", "p": "dl/3d/modelo/sonnental-esfera-2026_calota_azul.stl", "s": "1,1 MB"}, {"t": "STL faixa cinza", "p": "dl/3d/modelo/sonnental-esfera-2026_faixa_cinza.stl", "s": "1,1 MB"}, {"t": "STL calota verde", "p": "dl/3d/modelo/sonnental-esfera-2026_calota_verde.stl", "s": "1,1 MB"}, {"t": "STL sol", "p": "dl/3d/modelo/sonnental-esfera-2026_sol.stl", "s": "385 KB"}]}, {"g": "3d", "f": "sonnental-esfera-2026-impressao-3d", "n": "Arquivos para impressão 3D", "d": "Peças preparadas para imprimir: casca em 3 cores, sol oco para LED ou maciço, base com gabarito de encaixe, letreiro e pedestal, em STL, com o LEIA-ME e o arquivo do Blender. Os furos e pinos de gabarito existem só aqui.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-esfera-2026-tres-quartos.png", "arq": [{"t": "ZIP", "p": "dl/sonnental-esfera-2026-impressao-3d.zip", "s": "42,7 MB"}]}, {"g": "3d", "f": "sonnental-kit-construcao-esfera-3d", "n": "Kit para construir a esfera", "d": "Guia completo (com o script Python no final) e as tabelas das bordas da fenda, uma linha por grau, das versões 2026 e 2018.", "bg": "#FFFFFF", "prev": "dl/3d/sonnental-esfera-2026-frente.png", "arq": [{"t": "Kit completo ZIP", "p": "dl/sonnental-kit-construcao-esfera-3d.zip", "s": "30 KB"}, {"t": "Guia MD", "p": "dl/kit/sonnental-construir-esfera-3d.md", "s": "14 KB"}, {"t": "Script PY", "p": "dl/kit/construir_esfera_sonnental.py", "s": "6 KB"}, {"t": "Bordas 2026 CSV", "p": "dl/kit/esfera_2026_bordas.csv", "s": "28 KB"}, {"t": "Bordas 2018 CSV", "p": "dl/kit/esfera_2018_bordas.csv", "s": "33 KB"}]}, {"g": "pacote", "f": "sonnental-guia-da-marca", "n": "Guia da marca (para pessoas e IAs)", "d": "Todas as regras da marca num arquivo de texto. Para usar com ChatGPT, Gemini, Claude ou outra IA: anexe este arquivo na conversa e peça para seguir as regras dele.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-simbolo-degrade.svg", "arq": [{"t": "Guia MD", "p": "dl/guia-da-marca-sonnental.md", "s": "11 KB"}]}, {"g": "pacote", "f": "sonnental-marca-2d-todas-as-versoes", "n": "Todas as versões 2D", "d": "As 14 versões da marca e do símbolo em SVG, PNG sem fundo e PDF, num arquivo só.", "bg": "#FFFFFF", "prev": "dl/2d/svg/sonnental-marca-degrade.svg", "arq": [{"t": "ZIP", "p": "dl/sonnental-marca-2d-todas-as-versoes.zip", "s": "2,4 MB"}]}];
+  var GRUPOS = [["marca", "Marca completa"], ["simbolo", "Símbolo sozinho"], ["3d", "Esfera 2026 em 3D"], ["pacote", "Guia e pacote completo"]];
+  var lista = document.getElementById("arq-lista"), img = document.getElementById("arq-img"), previa = document.getElementById("arq-previa");
+  var nome = document.getElementById("arq-nome"), desc = document.getElementById("arq-desc"), forms = document.getElementById("arq-formatos"), msg = document.getElementById("arq-msg");
+  lista.innerHTML = GRUPOS.map(function (g) {
+    return '<div class="arq-grupo"><h3>' + g[1] + '</h3><div class="arq-botoes">' +
+      ITENS.map(function (it, i) { return it.g === g[0] ? '<button type="button" data-i="' + i + '" aria-pressed="false">' + it.n + '</button>' : ''; }).join('') + '</div></div>';
+  }).join('');
+  function escolher(i) {
+    var it = ITENS[i];
+    lista.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.i === i)); });
+    img.src = it.prev; img.alt = "Prévia: " + it.n; previa.style.background = it.bg;
+    nome.textContent = it.n; desc.textContent = it.d; msg.textContent = "";
+    forms.innerHTML = it.arq.map(function (a) { return '<a class="arq-link" href="' + (a.u || a.p) + '"' + (a.u ? ' target="_blank" rel="noopener"' : ' download') + '>' + a.t + (a.s ? ' <small>' + a.s + '</small>' : '') + '</a>'; }).join('');
+    forms.dataset.i = i;
+  }
+  lista.addEventListener("click", function (e) { var b = e.target.closest("button[data-i]"); if (b) escolher(+b.dataset.i); });
+  escolher(0);
+  var bc = document.getElementById("copiar-ia");
+  bc.addEventListener("click", function () {
+    var t = document.getElementById("txt-ia").textContent;
+    try { navigator.clipboard.writeText(t).then(function () { bc.textContent = "Copiado"; setTimeout(function () { bc.textContent = "Copiar texto"; }, 1500); }, function () { bc.textContent = "Selecione e copie o texto"; }); }
+    catch (e) { bc.textContent = "Selecione e copie o texto"; }
+  });
+}
+</script>
+</body>
+</html>
